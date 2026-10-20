@@ -1,0 +1,51 @@
+name: test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  crypto:
+    name: ${{ matrix.os }} · py${{ matrix.python }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python: ["3.11", "3.13"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+
+      # pycryptodome supplies the independent EAX oracle, so the hand-rolled
+      # AEAD is checked against a second implementation instead of against
+      # itself. Everything else in the suite runs with no dependencies at all.
+      - name: Install the EAX oracle
+        run: python -m pip install --quiet pycryptodome
+
+      - name: Compile every module
+        run: python -m compileall -q .
+
+      - name: Crypto self-test
+        run: python selftest.py
+
+      - name: Format and reader tests
+        run: python -m unittest discover -s tests -v
+
+  desktop-bundle:
+    name: desktop plugin syntax
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      # plugin.js loads uncompiled, so a syntax error is fatal at runtime and
+      # nothing else catches it.
+      - run: node --check desktop/plugin.js

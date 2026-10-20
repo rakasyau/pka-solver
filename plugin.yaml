@@ -1,0 +1,34 @@
+name: pka-solver
+version: 1.0.0
+description: "Solve Cisco Packet Tracer .pka assignments locally (no Docker): decrypt to XML, extract the answer key + assessment rubric, rebuild a 100% file, and open it in Packet Tracer."
+author: rakasyau
+manifest_version: 2
+api_version: 1
+license: BSD-2-Clause
+homepage: https://github.com/rakasyau/pka-solver
+tags: [packettracer, pka, networking, cisco]
+provides_tools:
+  - pka_decrypt
+  - pka_encrypt
+  - pka_inspect
+  - pka_solve
+  - pka_verify
+  - pka_open
+  - pka_logs
+  - pka_doctor
+python_dependencies: []
+# No install-time dependencies. Twofish ships as a bundled pure-Python
+# implementation (twofish_pure.py) and is transparently upgraded to the
+# native `_twofish` C extension when that module is importable.
+# `pip install twofish` is optional and only makes it ~50x faster.
+config_schema:
+  packet_tracer_path:
+    type: str
+    default: "C:/Program Files/Cisco Packet Tracer 9.0.1/bin/PacketTracer.exe"
+    label: "Packet Tracer executable"
+    description: "Full path to PacketTracer.exe, used by pka_open."
+  keep_temp_xml:
+    type: bool
+    default: false
+    label: "Keep intermediate XML"
+    description: "Leave the decrypted XML beside the solved file instead of deleting it."
