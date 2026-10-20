@@ -181,4 +181,5 @@ not affiliated with or endorsed by Cisco.
 
 ## License
 
-BSD 2-Clause. See [LICENSE](LICENSE) — it retains the original pka2xml notice.
+BSD 2-Clause. See [LICENSE](LICENSE) and [NOTICE](NOTICE) for the retained
+pka2xml attribution.
