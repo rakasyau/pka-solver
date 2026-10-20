@@ -4,10 +4,6 @@ Copyright (c) 2026, Raka Syauqi Ferdian
 Copyright (c) 2020, Mirco De Zorzi
 All rights reserved.
 
-This project is a Python port of the .pka decryption logic from pka2xml
-(https://github.com/mircodz/pka2xml), Copyright (c) 2020 Mirco De Zorzi,
-which is distributed under the BSD 2-Clause License reproduced above.
-
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:
 

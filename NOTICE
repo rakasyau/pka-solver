@@ -1,0 +1,39 @@
+NOTICE
+======
+
+PKA Solver
+Copyright (c) 2026 Raka Syauqi Ferdian
+
+This software is a Python port of the Cisco Packet Tracer .pka decryption
+logic from pka2xml:
+
+    pka2xml
+    https://github.com/mircodz/pka2xml
+    Copyright (c) 2020 Mirco De Zorzi
+    Licensed under the BSD 2-Clause License (see LICENSE)
+
+The port covers the Twofish-128 + EAX construction, the two XOR obfuscation
+passes, the length-prefixed zlib stream, and the on-disk layout of the
+`<PACKETTRACER5>` blocks. The decryption logic is reimplemented in Python and
+extended with the answer-key reader, the rubric extractor, the block-transplant
+solver, the tool and UI surfaces, and the bundled pure-Python Twofish cipher.
+
+Third-party components
+----------------------
+
+Twofish
+    Algorithm by Bruce Schneier et al. The pure-Python implementation in
+    twofish_pure.py follows the Gladman byte-oriented reference structure and
+    is validated against the published known-answer vectors (Twofish book,
+    appendix B.2) and against the loxodo implementation
+    (https://github.com/sommer/loxodo).
+
+pycryptodome (test-only, optional)
+    Used in selftest.py as an independent AES-EAX oracle for cross-checking the
+    hand-written EAX mode. Not required at runtime.
+
+Trademarks
+----------
+
+Packet Tracer and Cisco are trademarks of Cisco Systems, Inc. This project is
+not affiliated with, endorsed by, or sponsored by Cisco.
